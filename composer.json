@@ -14,7 +14,8 @@
         }
     ],
     "require": {
-        "php": "^7.4"
+        "php": "^7.2.5",
+        "laravelcollective/html": "^6.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",
