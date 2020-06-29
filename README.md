@@ -20,7 +20,8 @@ Execute o seguinte comando:
 composer require i9w3b/lang
 ```
 
-Opcional:
+Publicar views Opcional:
+
 ```bash
 php artisan vendor:publish --tag=multilingual-views
 ```
@@ -39,6 +40,21 @@ Alterar locale e timezone no arquivo config/app.php para:
 'timezone' => 'America/Sao_Paulo',
 'locale' => 'pt_BR',
 </code>
+
+##### Publicar config para ativar as rotas de edição/criação dos idiomas Opcional:
+
+```bash
+php artisan vendor:publish --tag=multilingual-config
+```
+
+```bash
+    /*
+    |--------------------------------------------------------------------------
+    | Publicar rotas
+    |--------------------------------------------------------------------------
+    */
+    'routes_show' => true,
+```
 
 ## Segurança
 
