@@ -3,6 +3,8 @@
 namespace I9w3b\Lang;
 
 use Illuminate\Support\ServiceProvider;
+use I9w3b\Lang\Http\Middleware\Lang;
+use Illuminate\Routing\Router;
 
 class LangServiceProvider extends ServiceProvider
 {
@@ -13,9 +15,9 @@ class LangServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->regConfig();
-        $this->regViews();
-        $this->regMiddleware();
+        $this->bootConfig();
+        $this->bootViews();
+        $this->bootMiddleware($this->app['router']);
     }
 
     /**
@@ -33,7 +35,7 @@ class LangServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function regConfig()
+    public function bootConfig()
     {
         $this->publishes([
             __DIR__ . '/../config/config.php' => config_path('lang.php'),
@@ -46,7 +48,7 @@ class LangServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function regViews()
+    public function bootViews()
     {
         $viewPath = resource_path('views/vendor/multilingual');
         $sourcePath = __DIR__ . '/Resources/views';
@@ -64,10 +66,9 @@ class LangServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function regMiddleware()
+    public function bootMiddleware(Router $router)
     {
-        $router = $this->app['router'];
-        $router->pushMiddlewareToGroup('web', 'I9w3b\Lang\Http\Middleware\Lang');
+        $router->pushMiddlewareToGroup('web', Lang::class);
     }
-
 }
+

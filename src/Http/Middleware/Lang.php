@@ -3,6 +3,7 @@
 namespace I9w3b\Lang\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\App;
 
 class Lang
 {
@@ -16,8 +17,9 @@ class Lang
     public function handle($request, Closure $next)
     {
         if (session()->has('locale')) {
-            \App::setLocale(session()->get('locale'));
+            App::setLocale(session()->get('locale'));
         }
         return $next($request);
     }
 }
+

@@ -2,10 +2,12 @@
 
 namespace I9w3b\Lang\Http\Controllers;
 
-use I9w3b\Lang;
-use Illuminate\Filesystem\Filesystem;
+use I9w3b\Lang\Lang;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\File;
+use Illuminate\Filesystem\Filesystem;
 
 class LangController extends Controller
 {
@@ -21,7 +23,7 @@ class LangController extends Controller
 
     public function index($locale)
     {
-        \App::setLocale($locale);
+        App::setLocale($locale);
         session()->put('locale', $locale);
         return redirect()->back();
     }
@@ -53,15 +55,15 @@ class LangController extends Controller
             mkdir($dir);
             chmod($dir, 0777);
             $jsonFile = $dir . ".json";
-            \File::copy($cpJf, $jsonFile);
+            File::copy($cpJf, $jsonFile);
             $Filesystem->copyDirectory($cpDt, $dir . "/");
         } else {
             if (!is_file($dir . '/lang.php') || !is_file($langDir . '/' . $langCode . '.json')) {
                 if (!is_file($dir . '/lang.php')) {
-                    \File::copy($cpDt.'/lang.php', $dir . '/lang.php');
+                    File::copy($cpDt.'/lang.php', $dir . '/lang.php');
                 }
                 if (!is_file($langDir . '/' . $langCode . '.json')) {
-                    \File::copy($cpJf, $langDir . '/' . $langCode . '.json');
+                    File::copy($cpJf, $langDir . '/' . $langCode . '.json');
                 }
             }
         }
@@ -74,7 +76,7 @@ class LangController extends Controller
             return redirect($this->manageLanguageRd());
         }
         $currantLang = $lang;
-        $languages = Lang\Lang::languages();
+        $languages = Lang::languages();
         $fileData = null;
         $dir = base_path() . '/resources/lang/' . $currantLang;
         if (!is_dir($dir) || !is_file($dir . '/lang.php') || !is_file($dir . '.json')) {
@@ -146,7 +148,7 @@ class LangController extends Controller
             mkdir($dir);
             chmod($dir, 0777);
             $jsonFile = $dir . ".json";
-            \File::copy(__DIR__ . '/../../Resources/lang/pt_BR.json', $jsonFile);
+            File::copy(__DIR__ . '/../../Resources/lang/pt_BR.json', $jsonFile);
             $Filesystem->copyDirectory(__DIR__ . '/../../Resources/lang/pt_BR', $dir . "/");
             return redirect()->route('manage.language', [$langCode])->with('status', __('Language Created Successfully!'));
         }else{
@@ -167,3 +169,4 @@ class LangController extends Controller
         return $content;
     }
 }
+
