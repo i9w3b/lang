@@ -54,6 +54,7 @@ php artisan vendor:publish --tag=multilingual-config
     |--------------------------------------------------------------------------
     */
     'routes_show' => true,
+    'route_locale_show' => true,
 ```
 
 ## Segurança
@@ -63,3 +64,4 @@ Caso descubra algum problema relacionado à segurança, envie um e-mail para `ma
 ## Licença
 
 [MIT](https://github.com/i9w3b/lang/blob/master/LICENSE.md) © [i9W3b](https://github.com/i9w3b) | Consulte [LICENSE.md](https://github.com/i9w3b/lang/blob/master/LICENSE.md) para obter mais informações.
+
