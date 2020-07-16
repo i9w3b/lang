@@ -16,6 +16,7 @@ return [
     */
     'routes_show' => false,
     'route_locale_show' => false,
+    'route_manage_language_show' => false,
 
     /*
     |--------------------------------------------------------------------------

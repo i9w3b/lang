@@ -55,6 +55,7 @@ php artisan vendor:publish --tag=multilingual-config
     */
     'routes_show' => true,
     'route_locale_show' => true,
+    'route_manage_language_show' => true,
 ```
 
 ## Segurança
